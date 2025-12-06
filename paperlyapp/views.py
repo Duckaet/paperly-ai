@@ -67,7 +67,14 @@ def generate_paper(request):
             }
 
             # Uncomment when your graph is ready
-            result = rungraph(user_input)
+             try:
+                result = rungraph(user_input)
+            except Exception as e:
+                return JsonResponse({
+                    "status": "error",
+                    "message": "rungraph failed",
+                    "error": str(e)
+                }, status=500)
             clean_output = {
                 "title": result.get("title", ""),
                 "abstract": result.get("abstract", ""),
