@@ -18,4 +18,8 @@ langchain
 langchain-openai
 langchain-core
 openai
+openai
 pydantic==2.8.2
+dj-database-url
+psycopg2-binary
+whitenoise
