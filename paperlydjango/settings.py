@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
                 "paperly-ai-production-f0c3.up.railway.app",]
+CSRF_TRUSTED_ORIGINS = [
+    'https://paperly-ai-production-f0c3.up.railway.app'
+]
 
 
 # Application definition
