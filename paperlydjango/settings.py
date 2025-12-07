@@ -27,14 +27,23 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-)#c(sey66xgdl179n62j-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+# Security: Configure allowed hosts
+RENDER_HOST = os.environ.get('RENDER_EXTERNAL_HOSTNAME', '')
+ALLOWED_HOSTS = [RENDER_HOST] if RENDER_HOST else ['localhost', '127.0.0.1']
+
+# Add legacy Railway hosts if needed
 if not DEBUG:
-    ALLOWED_HOSTS.append(os.environ.get('RENDER_EXTERNAL_HOSTNAME'))
-    ALLOWED_HOSTS.append("paperly-ai-production-f0c3.up.railway.app")
-    ALLOWED_HOSTS.append("independent-emotion-production.up.railway.app")
-CSRF_TRUSTED_ORIGINS = [
-    'https://paperly-ai-production-f0c3.up.railway.app'
-]
+    ALLOWED_HOSTS.extend([
+        "paperly-ai-production-f0c3.up.railway.app",
+        "independent-emotion-production.up.railway.app"
+    ])
+
+# CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = []
+if RENDER_HOST:
+    CSRF_TRUSTED_ORIGINS.append('https://' + RENDER_HOST)
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS.append('https://paperly-ai-production-f0c3.up.railway.app')
 
 
 # Application definition
@@ -59,6 +68,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Security headers
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 ROOT_URLCONF = 'paperlydjango.urls'
 
