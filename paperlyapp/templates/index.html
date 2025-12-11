@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paperly AI - Research Studio</title>
+    <title>Paperly AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -48,9 +48,10 @@
             padding: 20px;
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: auto auto;
+            grid-template-rows: auto;
             gap: 20px;
             min-height: 95vh;
+            align-content: center;
         }
 
         .bento-card {
@@ -73,42 +74,19 @@
 
         /* Card Variations */
         .card-hero {
-            grid-column: span 8;
-            grid-row: span 2;
-        }
-
-        .card-stats {
-            grid-column: span 4;
-            height: 200px;
-        }
-
-        .card-trending {
-            grid-column: span 4;
-            height: 200px;
-        }
-
-        .card-feature {
-            grid-column: span 4;
-            height: 200px;
+            grid-column: 3 / span 8;
+            /* Centered */
+            min-height: 600px;
         }
 
         @media (max-width: 1024px) {
             .card-hero {
-                grid-column: span 12;
-            }
-
-            .card-stats,
-            .card-trending,
-            .card-feature {
-                grid-column: span 6;
+                grid-column: 2 / span 10;
             }
         }
 
         @media (max-width: 768px) {
-
-            .card-stats,
-            .card-trending,
-            .card-feature {
+            .card-hero {
                 grid-column: span 12;
             }
         }
@@ -123,6 +101,12 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
             letter-spacing: -1px;
+            text-align: center;
+        }
+
+        .hero-desc {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
         h2 {
@@ -190,7 +174,8 @@
         .btn-generate {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            background: var(--accent-primary);
+            /* Solid color */
             border: none;
             border-radius: 14px;
             color: white;
@@ -207,6 +192,8 @@
         .btn-generate:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+            background: #7c3aed;
+            /* Slightly darker shade on hover */
         }
 
         /* Progress Visualizer Overlay */
@@ -274,6 +261,18 @@
             border: 1px solid var(--card-border);
             max-height: 500px;
             overflow-y: auto;
+            /* Scrollbar styling */
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-primary) transparent;
+        }
+
+        .step-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .step-list::-webkit-scrollbar-thumb {
+            background-color: var(--accent-primary);
+            border-radius: 10px;
         }
 
         .step-item {
@@ -332,36 +331,7 @@
             }
         }
 
-        /* Stats Cards Decor */
-        .stat-value {
-            font-size: 3rem;
-            font-weight: 700;
-            font-family: var(--font-mono);
-            background: linear-gradient(to bottom, #fff, #999);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .tag-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tag {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .tag:hover {
-            border-color: var(--accent-secondary);
-            background: rgba(236, 72, 153, 0.1);
-        }
+        /* Removed Tag Cloud CSS to clean up */
     </style>
 </head>
 
@@ -370,8 +340,8 @@
     <div class="wrapper">
         <!-- Hero / Form Card -->
         <div class="bento-card card-hero">
-            <div style="margin-bottom: 30px;">
-                <h1>Research Studio</h1>
+            <div class="hero-desc">
+                <h1>PaperlyAI</h1>
                 <p>Generate comprehensive academic papers using advanced AI agents.</p>
             </div>
 
@@ -425,44 +395,6 @@
                 </button>
             </form>
         </div>
-
-        <!-- Stats Card -->
-        <div class="bento-card card-stats">
-            <h3>System Status</h3>
-            <div style="margin-top: auto;">
-                <div class="stat-value">98%</div>
-                <p>Success Rate</p>
-                <div style="display: flex; align-items: center; gap: 8px; margin-top: 10px; color: #4ade80;">
-                    <div style="width: 8px; height: 8px; background: currentColor; border-radius: 50%;"></div>
-                    <span>All Systems Operational</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Trending Card -->
-        <div class="bento-card card-trending">
-            <h3>Trending Topics</h3>
-            <div class="tag-cloud" style="margin-top: 15px;">
-                <span class="tag">Generative AI</span>
-                <span class="tag">CRISPR</span>
-                <span class="tag">Fusion Energy</span>
-                <span class="tag">Dark Matter</span>
-                <span class="tag">RNA Vaccines</span>
-                <span class="tag">Quantum Error Correction</span>
-            </div>
-        </div>
-
-        <!-- Feature Card -->
-        <div class="bento-card card-feature">
-            <h3>Powered By</h3>
-            <div style="margin-top: auto;">
-                <h2
-                    style="margin:0; background: linear-gradient(to right, #8b5cf6, #ec4899); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
-                    DeepReasoning™</h2>
-                <p style="font-size: 0.9rem;">Multi-agent cognitive architecture for recursive research verification.
-                </p>
-            </div>
-        </div>
     </div>
 
     <!-- Progress Overlay -->
@@ -471,7 +403,7 @@
             <!-- Left: Timer & Status -->
             <div class="status-display">
                 <div class="time-label">Estimated Completion</div>
-                <div class="time-remaining" id="timer">02:30</div>
+                <div class="time-remaining" id="timer">06:00</div>
                 <div class="current-action" id="currentAction">Initializing...</div>
                 <p style="color: var(--text-muted); max-width: 300px;">
                     Our agents are actively researching, reading, and synthesizing information for your paper.
@@ -492,19 +424,20 @@
         const actionDisplay = document.getElementById('currentAction');
         const stepList = document.getElementById('stepList');
 
+        // Total duration sum ~ 330 seconds = 5.5 minutes
         const steps = [
-            { id: 1, text: "Analyzing Research Topic", duration: 5000 },
-            { id: 2, text: "Scanning arXiv Database", duration: 8000 },
-            { id: 3, text: "Selecting Top 5 Relevant Papers", duration: 8000 },
-            { id: 4, text: "Extracting Novelty Points", duration: 15000 },
-            { id: 5, text: "Identifying Research Gaps", duration: 10000 },
-            { id: 6, text: "Formulating Unique Contribution", duration: 10000 },
-            { id: 7, text: "Drafting Introduction", duration: 20000 },
-            { id: 8, text: "Synthesizing Literature Review", duration: 25000 },
-            { id: 9, text: "Designing Methodology", duration: 20000 },
-            { id: 10, text: "Writing Conclusion & Implications", duration: 15000 },
-            { id: 11, text: "Generating Abstract & Title", duration: 10000 },
-            { id: 12, text: "Final Polish & Formatting", duration: 5000 }
+            { id: 1, text: "Analyzing Research Topic", duration: 10000 },
+            { id: 2, text: "Scanning arXiv Database", duration: 15000 },
+            { id: 3, text: "Selecting Top 5 Relevant Papers", duration: 15000 },
+            { id: 4, text: "Extracting Novelty Points", duration: 40000 },
+            { id: 5, text: "Identifying Research Gaps", duration: 30000 },
+            { id: 6, text: "Formulating Unique Contribution", duration: 30000 },
+            { id: 7, text: "Drafting Introduction", duration: 40000 },
+            { id: 8, text: "Synthesizing Literature Review", duration: 50000 },
+            { id: 9, text: "Designing Methodology", duration: 40000 },
+            { id: 10, text: "Writing Conclusion & Implications", duration: 30000 },
+            { id: 11, text: "Generating Abstract & Title", duration: 20000 },
+            { id: 12, text: "Final Polish & Formatting", duration: 10000 }
         ];
 
         function renderSteps() {
